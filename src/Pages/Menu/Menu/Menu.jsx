@@ -13,8 +13,8 @@ const Menu = () => {
     const [menu] = useMenu()
     const desserts = menu.filter(item => item.category === 'dessert')
     const pizzas = menu.filter(item => item.category === 'pizza')
-    const soups = menu.filter(item => item.category === 'soup')
     const salads = menu.filter(item => item.category === 'salad')
+    const soups = menu.filter(item => item.category === 'soup')
     const offered = menu.filter(item => item.category === 'offered')
     return (
         <div>
@@ -25,13 +25,13 @@ const Menu = () => {
             <SectionTitle subHeading="Don't Miss" heading="Today's Offer"></SectionTitle>
             <MenuCategory items={offered}></MenuCategory>
 
-            <MenuCategory items={desserts} title="Dessert" coverImg={dessertImg} ></MenuCategory>
+            <MenuCategory items={desserts} title="dessert" coverImg={dessertImg} ></MenuCategory>
 
-            <MenuCategory items={pizzas} title="Pizza" coverImg={pizzaImg} ></MenuCategory>
+            <MenuCategory items={pizzas} title="pizza" coverImg={pizzaImg} ></MenuCategory>
 
-            <MenuCategory items={soups} title="Soup" coverImg={soupImg} ></MenuCategory>
+            <MenuCategory items={soups} title="soup" coverImg={soupImg} ></MenuCategory>
 
-            <MenuCategory items={salads} title="Salad" coverImg={saladImg} ></MenuCategory>
+            <MenuCategory items={salads} title="salad" coverImg={saladImg} ></MenuCategory>
             
         </div>
     );

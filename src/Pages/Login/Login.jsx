@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const {emailLogin} = useContext(AuthContext)
@@ -87,7 +88,7 @@ const Login = () => {
                                 New here? <Link to="/signUp" className="label-text-alt link link-hover font-bold text-[#00917c]">Sign Up</Link>
                         </label>
                     </form>
-                        
+                       <SocialLogin></SocialLogin> 
                     </div>
                 </div>
             </div>

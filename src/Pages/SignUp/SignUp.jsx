@@ -4,9 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 import { useContext } from "react";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic()
     const {register, handleSubmit, reset, formState: { errors },  } = useForm()
     const {createUser, updateUserProfile } = useContext(AuthContext)
     const navigate = useNavigate(null)
@@ -19,10 +22,23 @@ const SignUp = () => {
             console.log(loggedUser);
             updateUserProfile(data.name, data.image)
             .then(()=>{
-                reset()
-                toast.success('User created successfully');
-                navigate("/")
+                // create user entry in the database
+                const userInfo = {
+                    name: data.name,
+                    email: data.email
+                } 
+                axiosPublic.post('/users', userInfo)
+                .then(res => {
+                    if(res.data.insertedId){
+                        
+                        reset()
+                        toast.success('User created successfully');
+                        navigate("/")
+                    }
+                })
+                
             })
+            .catch(error => console.log(error))
         })
     }
     
@@ -83,7 +99,7 @@ const SignUp = () => {
                                 Have an account ? <Link to="/login" className="label-text-alt link link-hover font-bold text-[#00917c]">Login</Link>
                         </label>
                     </form>
-                        
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>

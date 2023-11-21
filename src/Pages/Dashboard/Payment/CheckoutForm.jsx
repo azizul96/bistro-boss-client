@@ -16,14 +16,14 @@ const CheckoutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxios();
     const {user} = useAuth()
-    const [cart, refetch] = useCart()
+    const [cart,] = useCart()
     const navigate = useNavigate()
     const totalPrice = cart.reduce((total, item)=> total + item.price, 0)
 
     useEffect(()=>{
         if(totalPrice > 0){
             axiosSecure.post('/create-payment-intent', {price: totalPrice})
-        .then(res =>{
+            .then(res =>{
             console.log(res.data.clientSecret);
             setClientSecret(res.data.clientSecret)
         })
@@ -81,7 +81,7 @@ const CheckoutForm = () => {
                 }
                 const res = await axiosSecure.post('/payments', payment)
                 // console.log(res);
-                refetch()
+                
                 if(res.data?.insertedId){
                    toast.success("Payment Successful!")
                    navigate('/dashboard/paymentHistory')
